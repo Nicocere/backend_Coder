@@ -1,0 +1,136 @@
+[
+    {
+        "id": 1,
+        "opciones": [
+            {
+                "tamaño": "Standard",
+                "color": [
+                    "Rosas ",
+                    "Rojas ",
+                    "Amarillas ",
+                    "Blancas"
+                ],
+                "precio": 6500
+            },
+            {
+                "color": [
+                    "Rosas ",
+                    "Rojas ",
+                    "Amarillas ",
+                    "Blancas"
+                ],
+                "tamaño": "Premium",
+                "precio": 8500
+            },
+            {
+                "tamaño": "Deluxe",
+                "color": [
+                    "Rosas ",
+                    "Rojas ",
+                    "Amarillas ",
+                    "Blancas"
+                ],
+                "precio": 12500
+            }
+        ],
+        "stock": 100,
+        "producto": true,
+        "descr": "Florero con rosas en papel italiano",
+        "tipo": "Florero",
+        "img": "../assets/imagenes/PRODUCTOS/florero_imperial_rosas.jpg",
+        "nombre": "Florero con rosas en papel italiano",
+        "categoria": [
+            "Rosas",
+            "Florero",
+            "Todos"
+        ]
+    },
+    {
+        "id": 2,
+        "nombre": "Florero con Liliums",
+        "tipo": "Florero",
+        "producto": true,
+        "descr": "Florero con Liliums",
+        "opciones": [
+            {
+                "color": [
+                    "rosas",
+                    "rojas",
+                    "blancas"
+                ],
+                "tamaño": 6,
+                "precio": 10
+            },
+            {
+                "color": [
+                    "rosas",
+                    "rojas",
+                    "blancas"
+                ],
+                "tamaño": 12,
+                "precio": 8500
+            },
+            {
+                "precio": 12500,
+                "color": [
+                    "rosas",
+                    "rojas",
+                    "blancas"
+                ],
+                "tamaño": 18
+            }
+        ],
+        "img": "../assets/imagenes/PRODUCTOS/Florero_lilium.jpg",
+        "categoria": [
+            "Florero",
+            "Todos"
+        ],
+        "stock": 100
+    },
+    {
+        "id": 3,
+        "nombre": "Canasta con Flores Estacion",
+        "stock": 100,
+        "img": "../assets/imagenes/PRODUCTOS/canasta_floresblancas_Estacion.jpg",
+        "producto": true,
+        "opciones": [
+            {
+                "tamaño": "Standard",
+                "precio": 6500,
+                "color": [
+                    "Rosas ",
+                    "Rojas ",
+                    "Amarillas ",
+                    "Blancas"
+                ]
+            },
+            {
+                "tamaño": "Premium",
+                "color": [
+                    "Rosas ",
+                    "Rojas ",
+                    "Amarillas ",
+                    "Blancas"
+                ],
+                "precio": 8500
+            },
+            {
+                "color": [
+                    "Rosas ",
+                    "Rojas ",
+                    "Amarillas ",
+                    "Blancas"
+                ],
+                "tamaño": "Deluxe",
+                "precio": 12500
+            }
+        ],
+        "tipo": "Canasta",
+        "descr": "Canasta con Flores de Estacion",
+        "categoria": [
+            "Canasta",
+            "Todos"
+        ]
+    }
+
+]
