@@ -94,8 +94,7 @@ export default class ProductManager {
     async deleteProduct(idProd) {
         const products = await this.getProduct()
         const deleteID = products.filter(prod => prod.id !== idProd)
-        console.log("ID POR ELIMINAR", deleteID)
-
+        // console.log("ID POR ELIMINAR", deleteID)
         //  await fs.promises.writeFile(this.path, JSON.stringify(deleteID))
     }
 
