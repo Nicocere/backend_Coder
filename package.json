@@ -2,10 +2,22 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "BackEnd-App",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nicocere/backend_Coder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Nicocere/backend_Coder/issues"
+  },
+  "homepage": "https://github.com/Nicocere/backend_Coder#readme"
 }
