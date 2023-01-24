@@ -18,7 +18,6 @@ app.get('/', async (req, res) => {
     const prods = await productManager.getProduct(req.query)
     // console.log("request", req.body)
     // console.log("PRODS SERVER", prods)
-
     res.json({ prods })
 })
 
