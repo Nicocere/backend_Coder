@@ -32,7 +32,7 @@ app.get('/productos', async (req, res) => {
 // productos por ID
 app.get('/detail/:idProd', async (req, res) => {
     const { idProd } = req.params
-    console.log("REq.params", idProd)
+    // console.log("REq.params", idProd)
     const prodID = await productManager.getProductById(parseInt(idProd))
     // console.log("PROD ID server", JSON.stringify(prodID))
 
@@ -42,12 +42,11 @@ app.get('/detail/:idProd', async (req, res) => {
 // CREAR producto
 app.post('/prod', async (req, res) => {
     const prodNuevo = req.body
-    console.log("prodNuevo SERVER ", prodNuevo)
-
+    // console.log("prodNuevo SERVER ", prodNuevo)
     const addProd = await productManager.addProduct(prodNuevo)
-    console.log("ADD PROD", addProd)
+    // console.log("ADD PROD", addProd)
 
-    res.json({ message: 'usuario creado con exito', addProd })
+    res.json({ message: 'Producto creado exitosamente', addProd })
 })
 
 // eliminar todos los productos
@@ -60,12 +59,12 @@ app.delete('/delete/all', async (req, res) => {
 // eliminar producto por ID
 app.delete('/delete/:idProd', async (req, res) => {
     const { idProd } = req.params
-    console.log("ID del PROD que se eliminara", idProd)
+    // console.log("ID del PROD que se eliminara", idProd)
     await productManager.deleteProduct(parseInt(idProd))
-    res.send('Usuario eliminado con exito')
+    res.send('Producto eliminado exitosamente')
 })
 
 
 app.listen(8080, () => {
-    console.log('Escuchando al puerto 8080')
+    // console.log('Escuchando al puerto 8080')
 })
