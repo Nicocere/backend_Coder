@@ -1,0 +1,154 @@
+[
+    {
+        "id": 1,
+        "price": 1000,
+        "producto": true,
+        "descr": "Ramo Surtido ",
+        "code": "Ramo",
+        "img": "../assets/imagenes/PRODUCTOS/Ramo_Surtido.jpg",
+        "title": "Ramo Surtido",
+        "categoria": [
+            "Rosas",
+            "Ramo",
+            "Todos"
+        ],
+        "stock": 100
+    },
+    {
+        "id": 2,
+        "price": 910,
+        "producto": true,
+        "descr": "Ramo Surtido ",
+        "code": "Ramo",
+        "img": "../assets/imagenes/PRODUCTOS/Ramo_Surtido.jpg",
+        "title": "Ramo Surtido",
+        "categoria": [
+            "Rosas",
+            "Ramo",
+            "Todos"
+        ],
+        "stock": 100
+    },
+    {
+        "id": 3,
+        "title": "Canasta con Flores Estacion",
+        "price": 480,
+        "img": "../assets/imagenes/PRODUCTOS/canasta_floresblancas_Estacion.jpg",
+        "producto": true,
+        "code": "Canasta",
+        "descr": "Canasta con Flores de Estacion",
+        "categoria": [
+            "Canasta",
+            "Todos"
+        ],
+        "stock": 100
+    },
+    {
+        "id": 4,
+          "title": "Ramo Surtido",
+          "price": 500,
+          "producto": true,
+          "descr": "Ramo Surtido ",
+          "code": "Ramo",
+          "img": "../assets/imagenes/PRODUCTOS/Ramo_Surtido.jpg",
+          "categoria": [
+              "Rosas",
+              "Ramo",
+              "Todos"
+          ],
+          "stock": 100
+      }
+      ,
+    {
+        "id": 5,
+        "title": "Canasta con Flores Estacion",
+        "price": 580,
+        "img": "../assets/imagenes/PRODUCTOS/canasta_floresblancas_Estacion.jpg",
+        "producto": true,
+        "code": "Canasta",
+        "descr": "Canasta con Flores de Estacion",
+        "categoria": [
+            "Canasta",
+            "Todos"
+        ],
+        "stock": 100
+      }
+      ,
+    {
+        "id": 6,
+          "title": "Caja de Rosas",
+          "price": 800,
+          "producto": true,
+          "descr": "Caja de Rosas ",
+          "code": "Caja",
+          "img": "../assets/imagenes/PRODUCTOS/Caja_de_Rosas.jpg",
+          "categoria": [
+              "Rosas",
+              "Caja",
+              "Todos"
+          ],
+          "stock": 100
+      }
+      ,
+    {
+        "id": 7,
+        "title": "Canasta con Flores Estacion",
+        "price": 580,
+        "img": "../assets/imagenes/PRODUCTOS/canasta_floresblancas_Estacion.jpg",
+        "producto": true,
+        "code": "Canasta",
+        "descr": "Canasta con Flores de Estacion",
+        "categoria": [
+            "Canasta",
+            "Todos"
+        ],
+        "stock": 100
+      }
+      ,
+    {
+        "id": 8,
+          "title": "Florero Surtido",
+          "price": 910,
+          "producto": true,
+          "descr": "Florero Surtido ",
+          "code": "Florero",
+          "img": "../assets/imagenes/PRODUCTOS/Florero_Surtido.jpg",
+          "categoria": [
+              "Rosas",
+              "Florero",
+              "Todos"
+          ],
+          "stock": 100
+      }
+      ,
+    {
+        "id": 9,
+        "title": "Florero con Flores Estacion",
+        "price": 580,
+        "img": "../assets/imagenes/PRODUCTOS/Florero_floresblancas_Estacion.jpg",
+        "producto": true,
+        "code": "Florero",
+        "descr": "Florero con Flores de Estacion",
+        "categoria": [
+            "Florero",
+            "Todos"
+        ],
+        "stock": 100
+      }
+      ,
+    {
+        "id": 10,
+          "title": "Ramo Surtido",
+          "price": 600,
+          "producto": true,
+          "descr": "Ramo Surtido ",
+          "code": "Ramo",
+          "img": "../assets/imagenes/PRODUCTOS/Ramo_Surtido.jpg",
+          "categoria": [
+              "Rosas",
+              "Ramo",
+              "Todos"
+          ],
+          "stock": 100
+      }
+]
