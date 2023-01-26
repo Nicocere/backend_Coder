@@ -19,5 +19,6 @@
   "bugs": {
     "url": "https://github.com/Nicocere/backend_Coder/issues"
   },
-  "homepage": "https://github.com/Nicocere/backend_Coder#readme"
+  "homepage": "https://github.com/Nicocere/backend_Coder#readme",
+  "devDependencies": {}
 }
