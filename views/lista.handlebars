@@ -1,0 +1,13 @@
+{{#if products.length}}
+{{#each products}}
+
+<p>Este es el producto que añadiste {{title}} y su ID es: {{id}}</p>
+<p>El precio es: ${{price}}  del producto {{contrasena}} </p>
+<p>Stock: {{stock}} </p>
+
+{{/each}}
+
+{{else}}
+<h2>NO SE AÑADIO NINGUN PRODUCTO</h2>
+
+{{/if}}
