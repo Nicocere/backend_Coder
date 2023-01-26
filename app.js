@@ -64,5 +64,4 @@ socketServer.on('connection', (socket) => {
         console.log("obj", obj)
         socketServer.emit('prods', newProds)
     })
-
 })
