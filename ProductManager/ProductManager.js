@@ -1,6 +1,6 @@
 import fs from 'fs'
 import express from 'express'
-const path = './ProductManager/Products.json'
+const path = './ProductManager/Productos.json'
 
 export default class ProductManager {
 
@@ -59,7 +59,7 @@ export default class ProductManager {
 
         productFile.push(newProd)
 
-        await fs.promises.writeFile(this.path, JSON.stringify(productFile))
+        // await fs.promises.writeFile(this.path, JSON.stringify(productFile))
 
         console.log("THSI PATH", this.path)
         return newProd
