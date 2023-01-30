@@ -32,6 +32,8 @@ router.get('/detail/:idProd', async (req, res) => {
     res.json({ prodID })
 })
 
+
+
 // CREAR producto
 router.post('/newprod', async (req, res) => {
     const prodNuevo = req.body
@@ -42,15 +44,39 @@ router.post('/newprod', async (req, res) => {
     res.json({ message: 'Producto creado exitosamente', addProd })
 })
 
+
+
 // ACTUALIZAR un producto
 
-router.put('/upload', async (req, res) => {
-    const prodNuevo = req.body
-    // console.log("prodNuevo SERVER ", prodNuevo)
-    const addProd = await productManager.addProduct(prodNuevo)
-    // console.log("ADD PROD", addProd)
+// router.put('/upload/:idProd', async (req, res) =>{
+//     try {
+//         let {idProd} = req.params
+//         let uploadProd = req.body
+//         console.log("ID PROD", idProd)
+//         let {title , price , descr, code , stock, status} = uploadProd
+//         console.log("UPLOAD PROD",uploadProd)
+//         await prod.update({uploadProd}, {
+//             where: {
+//                 idProd
+//             },
+//         })
+//     } catch (error) {
+//        console.log("no se pudo actualizar")
+//     }
+// })
 
-    res.json({ message: 'Producto creado exitosamente', addProd })
+
+router.put('/upload/:idProd', async (req, res) => {
+    let {idProd} = req.params
+    console.log("ID PROD",idProd)
+        let newProduct = req.body
+        let { title , price , descr, code , stock, status} = newProduct
+    console.log("prodNuevo SERVER ", newProduct)
+    const uploadProd = await productManager.updateProduct({newProduct, idProd})
+    console.log("upload PROD", uploadProd)
+    
+    res.json({ message: 'Producto creado exitosamente', productUpload: newProduct })
+    return uploadProd
 })
 
 

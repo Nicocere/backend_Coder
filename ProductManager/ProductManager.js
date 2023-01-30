@@ -41,41 +41,50 @@ export default class ProductManager {
         }
     }
 
+
+
     //  ------------ AÑADIR Producto  ------------
     async addProduct(prodNuevo) {
 
-        const productFile = await this.getProduct()
-
+        const prodREad = await fs.promises.readFile(path, 'utf-8')
+        console.log("prod read", prodREad)
+        const productFile = JSON.parse(prodREad)
         console.log("PRODUCT FILE", productFile)
-        console.log("prodNuevo ProductManager", prodNuevo)
+        console.log("Producto que llego como parametro", prodNuevo)
 
         let { id, title, price, img, producto, code, descr, categoria, stock } = prodNuevo
-
         id = productFile.length === 0 ? 1 : productFile[productFile.length - 1].id + 1
-        // console.log("ID", id)
 
-        const newProd = { id, ...prodNuevo }
-        console.log("new prod", newProd)
+    
+            const newProd = { id, ...prodNuevo }
+            console.log("Nuevo producto con ID", newProd)
 
-        productFile.push(newProd)
-
-        // await fs.promises.writeFile(this.path, JSON.stringify(productFile))
-
-        console.log("THSI PATH", this.path)
-        return newProd
-
+            
+            let prodAdded = productFile.push({newProd})
+            // await fs.promises.writeFile(this.path, JSON.stringify(productFile))
+            
+            console.log("nuevo objeto añadido:", prodAdded)
+            
+            return newProd
     }
+
+
     //  ------------ actualizar producto  ------------
     async updateProduct(newProduct) {
         try {
-            if (fs.existsSync(path)) {
+            // if (fs.existsSync(path)) {
+            console.log("NEW PRODUCT  MANAGER ! :", newProduct)
 
-                const updateProductFile = await this.getProductById()
-                updateProductFile.push(newProduct)
-                await fs.promises.writeFile(path, JSON.stringify(updateProductFile))
-            } else {
-                return []
-            }
+            // console.log("ID product manager", idProd)
+            const updateProductFile = await this.getProductById(parseInt(newProduct.idProd))
+
+
+            console.log("UPDATE PRODUCT FILE MANAGER", updateProductFile)
+            const newProdUpload = updateProductFile.push(newProduct)
+            // await fs.promises.writeFile(path, JSON.stringify(updateProductFile))
+            // } else {
+            //     return []
+            // }
         } catch (error) {
             console.log("ERROR", error)
         }
