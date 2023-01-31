@@ -1,7 +1,7 @@
 import { Router } from "express";
 import ProductManager from '../ProductManager/ProductManager.js'
 const productManager = new ProductManager('Productos.json')
-
+import { writeFile } from 'node:fs/promises';
 
 
 const router = Router();
@@ -23,7 +23,7 @@ router.get('/prod', async (req, res) => {
 
 
 // productos por ID
-router.get('/detail/:idProd', async (req, res) => {
+router.get('/:idProd', async (req, res) => {
     const { idProd } = req.params
     // console.log("REq.params", idProd)
     const prodID = await productManager.getProductById(parseInt(idProd))
@@ -67,16 +67,26 @@ router.post('/newprod', async (req, res) => {
 
 
 router.put('/upload/:idProd', async (req, res) => {
-    let {idProd} = req.params
-    console.log("ID PROD",idProd)
+    try {
+        
+        let { idProd } = req.params
+        let id = parseInt(idProd)
+        // console.log("ID", id)
+
         let newProduct = req.body
-        let { title , price , descr, code , stock, status} = newProduct
-    console.log("prodNuevo SERVER ", newProduct)
-    const uploadProd = await productManager.updateProduct({newProduct, idProd})
-    console.log("upload PROD", uploadProd)
-    
-    res.json({ message: 'Producto creado exitosamente', productUpload: newProduct })
-    return uploadProd
+        // let { title, price, descr, code, stock, status } = newProduct
+        
+        let productUpload = { id, ...newProduct }
+        console.log("productUpload SERVER ", productUpload)
+        const uploadProd = await productManager.updateProduct(productUpload)
+        console.log("upload PROD", uploadProd)
+
+        res.json({ message: 'Producto Actualizado exitosamente', productUpload: newProduct })
+        return res.send(uploadProd)
+        
+    } catch (error) {
+        console.log("no se pudo actualizar")
+    }
 })
 
 

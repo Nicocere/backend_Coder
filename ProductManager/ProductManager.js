@@ -41,54 +41,63 @@ export default class ProductManager {
         }
     }
 
-
-
     //  ------------ AÑADIR Producto  ------------
     async addProduct(prodNuevo) {
 
-        const prodREad = await fs.promises.readFile(path, 'utf-8')
-        console.log("prod read", prodREad)
-        const productFile = JSON.parse(prodREad)
+        const productFile = await this.getProduct()
+
         console.log("PRODUCT FILE", productFile)
-        console.log("Producto que llego como parametro", prodNuevo)
+        console.log("prodNuevo ProductManager", prodNuevo)
 
         let { id, title, price, img, producto, code, descr, categoria, stock } = prodNuevo
+
         id = productFile.length === 0 ? 1 : productFile[productFile.length - 1].id + 1
 
+
+        const newProd = { id, ...prodNuevo }
+        // console.log("new prod", newProd)
+        let prodAdded = productFile.push(newProd)
+        await fs.promises.writeFile(path, JSON.stringify(productFile))
+        console.log("prod added", prodAdded)
+        return newProd
+
+    };
+
     
-            const newProd = { id, ...prodNuevo }
-            console.log("Nuevo producto con ID", newProd)
-
-            
-            let prodAdded = productFile.push({newProd})
-            // await fs.promises.writeFile(this.path, JSON.stringify(productFile))
-            
-            console.log("nuevo objeto añadido:", prodAdded)
-            
-            return newProd
-    }
-
-
     //  ------------ actualizar producto  ------------
-    async updateProduct(newProduct) {
+    async updateProduct(productUpload) {
         try {
-            // if (fs.existsSync(path)) {
-            console.log("NEW PRODUCT  MANAGER ! :", newProduct)
+            const productFile = await this.getProduct()
 
-            // console.log("ID product manager", idProd)
-            const updateProductFile = await this.getProductById(parseInt(newProduct.idProd))
+            if (fs.existsSync(path)) {
+                console.log("productUpload PARAMETRO  MANAGER ! :", productUpload)
 
+                // console.log("ID product manager", idProd)
+                const getProdID = await this.getProductById(productUpload.id)
+                console.log("UPDATE PRODUCT FILE AWAIT MANAGER", getProdID)
 
-            console.log("UPDATE PRODUCT FILE MANAGER", updateProductFile)
-            const newProdUpload = updateProductFile.push(newProduct)
-            // await fs.promises.writeFile(path, JSON.stringify(updateProductFile))
-            // } else {
-            //     return []
-            // }
+                const newProduct = productFile.filter(elem => {
+                    if(elem.id === productUpload.id){
+                        elem.title = productUpload.title
+                        elem.price = productUpload.price
+                        elem.descr = productUpload.descr
+                        elem.code = productUpload.code
+                        elem.stock = productUpload.stock
+
+                    }
+                })
+                
+                
+              //  await fs.promises.writeFile(path, JSON.stringify(newProduct))
+               return newProduct
+                // const newProdUpload = productFile.push({})
+                // console.log("  newProdUpload PUSHH MANAGER", newProdUpload)
+
+            }
         } catch (error) {
             console.log("ERROR", error)
         }
-    }
+    };
 
     // ------------eliminar todos los productos------------
     async deleteAllProducts() {
@@ -101,10 +110,13 @@ export default class ProductManager {
 
     //  ------------ eliminar producto ------------
     async deleteProduct(idProd) {
+
+
         const products = await this.getProduct()
         const deleteID = products.filter(prod => prod.id !== idProd)
         // console.log("ID POR ELIMINAR", deleteID)
-        //  await fs.promises.writeFile(this.path, JSON.stringify(deleteID))
+        // await fs.promises.writeFile(path, JSON.stringify(deleteID))
+
     }
 
 }
