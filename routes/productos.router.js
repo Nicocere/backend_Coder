@@ -1,7 +1,6 @@
 import { Router } from "express";
 import ProductManager from '../ProductManager/ProductManager.js'
 const productManager = new ProductManager('Productos.json')
-import { writeFile } from 'node:fs/promises';
 
 
 const router = Router();
@@ -68,14 +67,14 @@ router.post('/newprod', async (req, res) => {
 
 router.put('/upload/:idProd', async (req, res) => {
     try {
-        
+
         let { idProd } = req.params
         let id = parseInt(idProd)
         // console.log("ID", id)
 
         let newProduct = req.body
         // let { title, price, descr, code, stock, status } = newProduct
-        
+
         let productUpload = { id, ...newProduct }
         console.log("productUpload SERVER ", productUpload)
         const uploadProd = await productManager.updateProduct(productUpload)
@@ -83,7 +82,7 @@ router.put('/upload/:idProd', async (req, res) => {
 
         res.json({ message: 'Producto Actualizado exitosamente', productUpload: newProduct })
         return res.send(uploadProd)
-        
+
     } catch (error) {
         console.log("no se pudo actualizar")
     }

@@ -1,19 +1,19 @@
 import { Router } from "express";
-import ProductManager from '../ProductManager/ProductManager.js'
-const productManager = new ProductManager('Productos.json')
+import CartManager from '../CartManager/CartManager.js'
+const cartManager = new CartManager('../ProductManager/Productos.json')
 
 const router = Router();
 
 // todos los productos
 router.get('/', async (req, res) => {
-    const prods = await productManager.getProduct(req.query)
+    const prods = await cartManager.getProduct(req.query)
     // const {limit, order} = req.query
     res.json({ prods })
 })
 
 // productos con limites
 router.get('/cart', async (req, res) => {
-    const prods = await productManager.getProduct(req.query)
+    const prods = await cartManager.getProduct(req.query)
     const { limit, order } = req.query
     const prodLimit = prods.slice(0, limit)
     res.json({ prodLimit })
@@ -24,7 +24,7 @@ router.get('/cart', async (req, res) => {
 router.get('/:idProd', async (req, res) => {
     const { idProd } = req.params
     // console.log("REq.params", idProd)
-    const prodID = await productManager.getProductById(parseInt(idProd))
+    const prodID = await cartManager.getProductById(parseInt(idProd))
     // console.log("PROD ID server", JSON.stringify(prodID))
 
     res.json({ prodID })
@@ -34,7 +34,7 @@ router.get('/:idProd', async (req, res) => {
 router.post('/newprod', async (req, res) => {
     const prodNuevo = req.body
     // console.log("prodNuevo SERVER ", prodNuevo)
-    const addProd = await productManager.addProduct(prodNuevo)
+    const addProd = await cartManager.addProduct(prodNuevo)
     // console.log("ADD PROD", addProd)
 
     res.json({ message: 'Producto creado exitosamente', addProd })
@@ -42,7 +42,7 @@ router.post('/newprod', async (req, res) => {
 
 // eliminar todos los productos
 router.delete('/delete/all', async (req, res) => {
-    await productManager.deleteAllProducts()
+    await cartManager.deleteAllProducts()
     res.send('Todos los productos fueron eliminados eliminados')
 })
 
@@ -51,7 +51,7 @@ router.delete('/delete/all', async (req, res) => {
 router.delete('/delete/:idProd', async (req, res) => {
     const { idProd } = req.params
     // console.log("ID del PROD que se eliminara", idProd)
-    await productManager.deleteProduct(parseInt(idProd))
+    await cartManager.deleteProduct(parseInt(idProd))
     res.send('Producto eliminado exitosamente')
 })
 

@@ -14,9 +14,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 
 // configurar handlebars
-app.engine('handlebars',handlebars.engine()) // unicamente lo hacemos para handlebars o para crear un motor propio
-app.set('views',__dirname+'/views')
-app.set('view engine','handlebars')
+app.engine('handlebars', handlebars.engine()) // unicamente lo hacemos para handlebars o para crear un motor propio
+app.set('views', __dirname + '/views')
+app.set('view engine', 'handlebars')
 
 
 
@@ -26,10 +26,10 @@ app.use('/cart', cartRouter)
 app.use('/views', viewsRouter)
 
 app.get('/', (req, res) => {
-    res.send({ message:'Estas en el INICIO :) ' })
+    res.send({ message: 'Estas en el INICIO :) ' })
 })
 
 
 app.listen(8080, () => {
-     console.log('Escuchando al puerto 8080')
+    console.log('Escuchando al puerto 8080')
 })

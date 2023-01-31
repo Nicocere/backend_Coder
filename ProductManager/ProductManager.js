@@ -63,7 +63,7 @@ export default class ProductManager {
 
     };
 
-    
+
     //  ------------ actualizar producto  ------------
     async updateProduct(productUpload) {
         try {
@@ -77,7 +77,7 @@ export default class ProductManager {
                 console.log("UPDATE PRODUCT FILE AWAIT MANAGER", getProdID)
 
                 const newProduct = productFile.filter(elem => {
-                    if(elem.id === productUpload.id){
+                    if (elem.id === productUpload.id) {
                         elem.title = productUpload.title
                         elem.price = productUpload.price
                         elem.descr = productUpload.descr
@@ -86,10 +86,10 @@ export default class ProductManager {
 
                     }
                 })
-                
-                
-              //  await fs.promises.writeFile(path, JSON.stringify(newProduct))
-               return newProduct
+
+
+                //  await fs.promises.writeFile(path, JSON.stringify(newProduct))
+                return newProduct
                 // const newProdUpload = productFile.push({})
                 // console.log("  newProdUpload PUSHH MANAGER", newProdUpload)
 
