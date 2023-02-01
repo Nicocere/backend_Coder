@@ -68,68 +68,10 @@ export default class CartManager {
 
         // console.log("id  cart.manger ", carrito)
 
-        
-
         // await fs.promises.writeFile(path, JSON.stringify(carrito))
 
         // return newProduct
 
-    };
-
-
-
-    // ------------eliminar todos los productos------------
-    async deleteAllProducts() {
-        if (fs.existsSync(this.path)) {
-            const emptyArray = await fs.promises.unlink(this.path)
-            console.log("empty prods", emptyArray)
-            return emptyArray
-        }
-    }
-
-    //  ------------ eliminar producto ------------
-    async deleteProduct(idProd) {
-
-
-        // // const products = await this.getProduct()
-        // const deleteID = products.filter(prod => prod.id !== idProd)
-        // console.log("ID POR ELIMINAR", deleteID)
-        // await fs.promises.writeFile(path, JSON.stringify(deleteID))
-
     }
 
 }
-
-// const manager = new CartManager()
-
-// async function ejecutarPrueba() {
-
-//     // ----  CREAR PRODUCTO NUEVO -----
-
-//     // const addProduct = await manager.addProduct() 
-
-
-//     // // ---- TRAER PRODUCTOS ----
-//     // // // const getProduct = await manager.getProduct()
-
-//     // // // ---- TRAER PRODUCTO POR ID ----
-//     // const getProductById = await manager.getProductById()
-
-
-//     // ---- MODIFICAR PRODUCTO ----
-
-//     // const updateProduct = await manager.updateProduct()
-
-
-//     // ELIMINAR TODOS LOS PRODUCTOS
-//     // const deleteAll = await manager.deleteAllProducts()
-
-//     // --- ELIMINAR PRODUCTO POR ID ----
-//     const productDeleted = await manager.deleteProduct()
-
-
-// }
-
-// ejecutarPrueba()
-
-

@@ -57,34 +57,4 @@ router.get('/:idProd', async (req, res) => {
     res.json({ prodID })
 })
 
-// // productos con limites
-// router.get('/cart', async (req, res) => {
-//     const prods = await cartManager.getProduct(req.query)
-//     const { limit, order } = req.query
-//     const prodLimit = prods.slice(0, limit)
-//     res.json({ prodLimit })
-// })
-
-
-
-
-
-
-// eliminar todos los productos
-router.delete('/delete/all', async (req, res) => {
-    await cartManager.deleteAllProducts()
-    res.send('Todos los productos fueron eliminados eliminados')
-})
-
-
-// eliminar producto por ID
-router.delete('/delete/:idProd', async (req, res) => {
-    const { idProd } = req.params
-    // console.log("ID del PROD que se eliminara", idProd)
-    await cartManager.deleteProduct(parseInt(idProd))
-    res.send('Producto eliminado exitosamente')
-})
-
-
-
 export default router
