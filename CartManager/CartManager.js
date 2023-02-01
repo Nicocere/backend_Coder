@@ -1,33 +1,44 @@
 import fs from 'fs'
 import express from 'express'
-const path = '../ProductManager/Productos.json'
+const path = './CartManager/CartProducts.json'
+
+
+
 
 export default class CartManager {
 
 
+    //  ------------ CREAR NUEVO CARRITO  ------------
+    async newCart(carrito) {
+
+        await fs.promises.writeFile(path, JSON.stringify(carrito))
+
+    };
+
     //  ------------Traer todos los productos ------------
-    async getProduct() {
+    async getCart() {
         try {
             if (fs.existsSync(path)) {
-                const productFile = await fs.promises.readFile(path, 'utf-8')
-                const productoJS = JSON.parse(productFile)
-                // console.log("PRODUCTOS EN JSON", productoJS)
-                return productoJS
+                const cartFile = await fs.promises.readFile(path, 'utf-8')
+                const cartFileJS = JSON.parse(cartFile)
+                console.log("cartFile EN JSON", cartFileJS)
+                return cartFileJS
             } else {
                 return []
             }
         } catch (error) {
             console.log(error)
         }
-    }
+    };
+
 
     // ------------ Traer productos por ID   ------------
     async getProductById(idProd) {
 
         try {
-            if (this.getProduct) {
-                const productId = await this.getProduct()
-              
+            if (this.getCart) {
+                const productId = await this.getCart()
+
                 let prodId = productId.find((prod) => prod.id === idProd)
 
                 return prodId
@@ -39,63 +50,33 @@ export default class CartManager {
         }
     }
 
+
+
     //  ------------ AÑADIR Producto  ------------
-    async addProduct(prodNuevo) {
+    async addProduct(carrito) {
 
-        const productFile = await this.getProduct()
+        const cartFile = await this.getCart()
 
-        console.log("PRODUCT FILE", productFile)
-        console.log("prodNuevo ProductManager", prodNuevo)
+        console.log("CART FILEEEEEE ",  cartFile[carrito.id].productos)
+        console.log("carrito cart.manger ", carrito.id)
 
-        let { id, title, price, img, producto, code, descr, categoria, stock } = prodNuevo
+        cartFile[carrito.id].productos = carrito.idProd
 
-        id = productFile.length === 0 ? 1 : productFile[productFile.length - 1].id + 1
+        console.log("PRODUCTOS DEL CARRITO",carrito.idProd)
 
+        carrito.id = cartFile.length === 0 ? 1 : cartFile[cartFile.length - 1].id + 1
 
-        const newProd = { id, ...prodNuevo }
-        // console.log("new prod", newProd)
-        let prodAdded = productFile.push(newProd)
-        await fs.promises.writeFile(path, JSON.stringify(productFile))
-        console.log("prod added", prodAdded)
-        return newProd
+        // console.log("id  cart.manger ", carrito)
+
+        
+
+        // await fs.promises.writeFile(path, JSON.stringify(carrito))
+
+        // return newProduct
 
     };
 
 
-    //  ------------ actualizar producto  ------------
-    async updateProduct(productUpload) {
-        try {
-            const productFile = await this.getProduct()
-
-            if (fs.existsSync(path)) {
-                console.log("productUpload PARAMETRO  MANAGER ! :", productUpload)
-
-                // console.log("ID product manager", idProd)
-                const getProdID = await this.getProductById(productUpload.id)
-                console.log("UPDATE PRODUCT FILE AWAIT MANAGER", getProdID)
-
-                const newProduct = productFile.filter(elem => {
-                    if (elem.id === productUpload.id) {
-                        elem.title = productUpload.title
-                        elem.price = productUpload.price
-                        elem.descr = productUpload.descr
-                        elem.code = productUpload.code
-                        elem.stock = productUpload.stock
-
-                    }
-                })
-
-
-                //  await fs.promises.writeFile(path, JSON.stringify(newProduct))
-                return newProduct
-                // const newProdUpload = productFile.push({})
-                // console.log("  newProdUpload PUSHH MANAGER", newProdUpload)
-
-            }
-        } catch (error) {
-            console.log("ERROR", error)
-        }
-    };
 
     // ------------eliminar todos los productos------------
     async deleteAllProducts() {
@@ -110,8 +91,8 @@ export default class CartManager {
     async deleteProduct(idProd) {
 
 
-        const products = await this.getProduct()
-        const deleteID = products.filter(prod => prod.id !== idProd)
+        // // const products = await this.getProduct()
+        // const deleteID = products.filter(prod => prod.id !== idProd)
         // console.log("ID POR ELIMINAR", deleteID)
         // await fs.promises.writeFile(path, JSON.stringify(deleteID))
 
@@ -119,34 +100,36 @@ export default class CartManager {
 
 }
 
-const manager = new CartManager()
+// const manager = new CartManager()
 
-async function ejecutarPrueba() {
+// async function ejecutarPrueba() {
 
-    // ---- TRAER PRODUCTOS ----
-    const getProduct = await manager.getProduct()
+//     // ----  CREAR PRODUCTO NUEVO -----
 
-    // // ---- TRAER PRODUCTO POR ID ----
-    const getProductById = await manager.getProductById()
-
-    // ----  CREAR PRODUCTO NUEVO -----
-
-    // const addProduct = await manager.addProduct() 
-
-    // ---- MODIFICAR PRODUCTO ----
-
-    // const updateProduct = await manager.updateProduct()
+//     // const addProduct = await manager.addProduct() 
 
 
-    // ELIMINAR TODOS LOS PRODUCTOS
-    const deleteAll = await manager.deleteAllProducts()
+//     // // ---- TRAER PRODUCTOS ----
+//     // // // const getProduct = await manager.getProduct()
 
-    // --- ELIMINAR PRODUCTO POR ID ----
-    const productDeleted = await manager.deleteProduct()
+//     // // // ---- TRAER PRODUCTO POR ID ----
+//     // const getProductById = await manager.getProductById()
 
 
-}
+//     // ---- MODIFICAR PRODUCTO ----
 
-ejecutarPrueba()
+//     // const updateProduct = await manager.updateProduct()
+
+
+//     // ELIMINAR TODOS LOS PRODUCTOS
+//     // const deleteAll = await manager.deleteAllProducts()
+
+//     // --- ELIMINAR PRODUCTO POR ID ----
+//     const productDeleted = await manager.deleteProduct()
+
+
+// }
+
+// ejecutarPrueba()
 
 
