@@ -76,22 +76,14 @@ export default class ProductManager {
                 const getProdID = await this.getProductById(productUpload.id)
                 console.log("UPDATE PRODUCT FILE AWAIT MANAGER", getProdID)
 
-                const newProduct = productFile.filter(elem => {
-                    if (elem.id === productUpload.id) {
-                        elem.title = productUpload.title
-                        elem.price = productUpload.price
-                        elem.descr = productUpload.descr
-                        elem.code = productUpload.code
-                        elem.stock = productUpload.stock
+                const newProduct = productFile.filter(elem =>  elem.id === productUpload.id )
 
-                    }
-                })
+                const newProdUpload = productFile.push({productUpload})
 
+                console.log("  newProdUpload PUSHH MANAGER", newProdUpload)
 
                 //  await fs.promises.writeFile(path, JSON.stringify(newProduct))
-                return newProduct
-                // const newProdUpload = productFile.push({})
-                // console.log("  newProdUpload PUSHH MANAGER", newProdUpload)
+                return newProdUpload
 
             }
         } catch (error) {
@@ -101,8 +93,8 @@ export default class ProductManager {
 
     // ------------eliminar todos los productos------------
     async deleteAllProducts() {
-        if (fs.existsSync(this.path)) {
-            const emptyArray = await fs.promises.unlink(this.path)
+        if (fs.existsSync(path)) {
+            const emptyArray = await fs.promises.unlink(path)
             console.log("empty prods", emptyArray)
             return emptyArray
         }
@@ -120,56 +112,3 @@ export default class ProductManager {
     }
 
 }
-
-const manager = new ProductManager()
-
-async function ejecutarPrueba() {
-
-    // ---- TRAER PRODUCTOS ----
-    const getProduct = await manager.getProduct()
-
-    // // ---- TRAER PRODUCTO POR ID ----
-    const getProductById = await manager.getProductById()
-
-    // ----  CREAR PRODUCTO NUEVO -----
-
-    // const addProduct = await manager.addProduct()
-    //         {
-    //     price: 510,
-    //     producto: true,
-    //     descr: 'Florero Rosas ',
-    //     code: 'Florero',
-    //     img: '../assets/imagenes/PRODUCTOS/Florero_rosas.jpg',       
-    //     title: 'Florero',
-    //     categoria: [ 'Rosas', 'Florero', 'Todos' ],
-    //     stock: 100
-    //         }
-    //    
-
-    // ---- MODIFICAR PRODUCTO ----
-
-    // const updateProduct = await manager.updateProduct()
-    // {
-    // id: 3, 
-    // price: 510,
-    // producto: true,
-    // descr: 'Florero Rosas ',
-    // code: 'Florero',
-    // img: '../assets/imagenes/PRODUCTOS/Florero_rosas.jpg',       
-    // title: 'Florero',
-    // categoria: [ 'Rosas', 'Florero', 'Todos' ],
-    // stock: 100
-    // })
-
-    // ELIMINAR TODOS LOS PRODUCTOS
-    const deleteAll = await manager.deleteAllProducts()
-
-    // --- ELIMINAR PRODUCTO POR ID ----
-    const productDeleted = await manager.deleteProduct()
-
-
-}
-
-ejecutarPrueba()
-
-

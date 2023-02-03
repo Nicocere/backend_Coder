@@ -16,6 +16,7 @@ router.post('/', async (req, res) => {
     await cartManager.newCart(carrito)
 
     carrito.push(req.body)
+    req.json({message: 'Se ha creado un nuevo carrito de compras.'})
 
 })
 
