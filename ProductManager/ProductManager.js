@@ -72,18 +72,20 @@ export default class ProductManager {
             if (fs.existsSync(path)) {
                 console.log("productUpload PARAMETRO  MANAGER ! :", productUpload)
 
+                let {id, price, descr, code} = productUpload
+
                 // console.log("ID product manager", idProd)
                 const getProdID = await this.getProductById(productUpload.id)
-                console.log("UPDATE PRODUCT FILE AWAIT MANAGER", getProdID)
+                console.log("GET PRODUCT ID AWAIT MANAGER", getProdID)
 
-                const newProduct = productFile.filter(elem =>  elem.id === productUpload.id )
+                // const newProduct = productFile.filter(elem =>  elem.id === productUpload.id )
 
-                const newProdUpload = productFile.push({productUpload})
+                const newProdUpload = productFile.push({...productUpload,id, price, descr, code})
 
-                console.log("  newProdUpload PUSHH MANAGER", newProdUpload)
+                 console.log("  newProdUpload Push", newProdUpload)
 
                 //  await fs.promises.writeFile(path, JSON.stringify(newProduct))
-                return newProdUpload
+                // return newProdUpload
 
             }
         } catch (error) {

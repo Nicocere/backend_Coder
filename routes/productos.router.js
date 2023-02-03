@@ -73,12 +73,13 @@ router.put('/upload/:idProd', async (req, res) => {
         // console.log("ID", id)
 
         let newProduct = req.body
+        console.log("new prod router", newProduct)
         // let { title, price, descr, code, stock, status } = newProduct
 
         let productUpload = { id, ...newProduct }
-        console.log("productUpload router ", productUpload)
+        // console.log("productUpload router ", productUpload)
         const uploadProd = await productManager.updateProduct(productUpload)
-        console.log("upload PROD router", uploadProd)
+        // console.log("upload PROD router", uploadProd)
 
         res.json({ message: 'Producto Actualizado exitosamente', productUpload: newProduct })
         return res.send(uploadProd)
