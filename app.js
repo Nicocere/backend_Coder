@@ -6,6 +6,8 @@ import productosRouter from './routes/productos.router.js'
 import cartRouter from './routes/carts.router.js'
 import viewsRouter from './routes/views.router.js'
 
+console.log(__dirname)
+
 
 const productManager = new ProductManager('Productos.json')
 const app = express()
