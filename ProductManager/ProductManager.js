@@ -1,5 +1,6 @@
 import fs from 'fs'
 import express from 'express'
+import { get } from 'http'
 const path = './ProductManager/Productos.json'
 
 export default class ProductManager {
@@ -68,26 +69,28 @@ export default class ProductManager {
     async updateProduct(productUpload) {
         try {
             const productFile = await this.getProduct()
-
-            if (fs.existsSync(path)) {
                 console.log("productUpload PARAMETRO  MANAGER ! :", productUpload)
-
-                let {id, price, descr, code} = productUpload
-
-                // console.log("ID product manager", idProd)
+                
                 const getProdID = await this.getProductById(productUpload.id)
+                
+                
+
+          
+                if(getProdID.id === productUpload.id){
+                    
+                    getProdID.price = productUpload.price;
+                    getProdID.descr = productUpload.descr;
+                    getProdID.code = productUpload.code;
+                    getProdID.title = productUpload.title;
+                    getProdID.categoria = productUpload.categoria;
+                    getProdID.stock = productUpload.stock
+                    
+                }
+                
                 console.log("GET PRODUCT ID AWAIT MANAGER", getProdID)
-
-                // const newProduct = productFile.filter(elem =>  elem.id === productUpload.id )
-
-                const newProdUpload = productFile.push({...productUpload,id, price, descr, code})
-
-                 console.log("  newProdUpload Push", newProdUpload)
-
-                //  await fs.promises.writeFile(path, JSON.stringify(newProduct))
-                // return newProdUpload
-
-            }
+                // await fs.promises.writeFile(path, JSON.stringify(getProdID))
+                return getProdID
+       
         } catch (error) {
             console.log("ERROR", error)
         }

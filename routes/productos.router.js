@@ -70,22 +70,20 @@ router.put('/upload/:idProd', async (req, res) => {
 
         let { idProd } = req.params
         let id = parseInt(idProd)
-        // console.log("ID", id)
 
         let newProduct = req.body
         console.log("new prod router", newProduct)
-        // let { title, price, descr, code, stock, status } = newProduct
 
         let productUpload = { id, ...newProduct }
         // console.log("productUpload router ", productUpload)
         const uploadProd = await productManager.updateProduct(productUpload)
-        // console.log("upload PROD router", uploadProd)
 
-        res.json({ message: 'Producto Actualizado exitosamente', productUpload: newProduct })
-        return res.send(uploadProd)
+
+        res.json({ message: 'Producto Actualizado exitosamente', uploadProd })
+        return uploadProd
 
     } catch (error) {
-        console.log("no se pudo actualizar")
+        console.log("no se pudo actualizar", error)
     }
 });
 
@@ -105,7 +103,7 @@ router.delete('/delete/:idProd', async (req, res) => {
     await productManager.deleteProduct(parseInt(idProd))
 
 
-    res.json({ message: 'Se ha elimiado correctamente un producto. El producto eliminado es:', ID: idProd})
+    res.json({ message: 'Se ha elimiado correctamente un producto. El producto eliminado es: ' + idProd })
     });
 
 
