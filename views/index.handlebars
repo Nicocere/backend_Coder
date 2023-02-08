@@ -1,0 +1,22 @@
+<h1 style="border-bottom: 1px black solid; color:brown; font-family:cursive">Todos los productos:</h1>
+
+<form style="font-family:sans-serif " action='/realTimeProducts' method='get'>AGREGAR UN PRODUCTO
+<input type='submit' value='Ir a agregar productos' />
+</form>
+{{#if products.length}}
+{{#each products}}
+
+<h2 style="font-family:sans-serif; border-bottom: .5px solid red; width:fit-content">TITULO:  {{title}} </h2>
+
+<h3 style="font-family:sans-serif; border-bottom: .5px solid black; width:fit-content"> ID es: {{id}}</h3>
+<p style="font-family:sans-serif; border-bottom: .5px solid black; width:fit-content">El precio es: <strong> $ {{price}} </strong> </p>
+<p style="font-family:sans-serif; border-bottom: .5px solid black; width:fit-content">Descripcion: <strong> {{descr}} </strong> </p>
+<p style="font-family:sans-serif; border-bottom: .5px solid black; width:fit-content">Stock: <strong> {{stock}} </strong></p>
+<br>
+
+{{/each}}
+
+{{else}}
+<h2>NO SE AÑADIO NINGUN PRODUCTO</h2>
+
+{{/if}}
