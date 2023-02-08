@@ -1,6 +1,6 @@
 <h3>Ingresa los datos del producto que desea agregar:</h3>
 
-<form  id="formulario">
+<form  id="formulario" action="/productos/newprod" method='post'>
  Title: <input type='text' name='title' id='title' />
  Price: <input type="number" name='price' id='price' />
  Description <input type='text' name='description' id='description' />
@@ -11,7 +11,7 @@
 
 <br>
 
-<form action='/' method='get'>Mostrar todos los productos
+<form id="showAll" action='/' method='get'>Mostrar todos los productos
 <input type='submit' value='Mostrar todo' />
 </form>
 

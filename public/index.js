@@ -18,7 +18,7 @@ formulario.onsubmit = (e) => {
     descr: descripcion.value,
     stock: stock.value
   }
-  console.log("INFO", info.titulo)
+  console.log("INFO", info)
   
   Swal.fire({
     position: 'top-end',

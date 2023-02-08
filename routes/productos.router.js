@@ -40,7 +40,8 @@ router.post('/newprod', async (req, res) => {
     const addProd = await productManager.addProduct(prodNuevo)
     // console.log("ADD PROD", addProd)
 
-    res.json({ message: 'Producto creado exitosamente', addProd })
+    // res.json({ message: 'Producto creado exitosamente', addProd })
+    res.redirect('../realtimeproducts')
 })
 
 
