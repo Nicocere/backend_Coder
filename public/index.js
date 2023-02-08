@@ -20,7 +20,13 @@ formulario.onsubmit = (e) => {
   }
   console.log("INFO", info.titulo)
   
-
+  Swal.fire({
+    position: 'top-end',
+    icon: 'success',
+    title: 'Has agregado un producto con exito',
+    showConfirmButton: false,
+    timer: 1100
+  })
 
   socketClient.emit('prods', info)
 }
