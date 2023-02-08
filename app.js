@@ -41,12 +41,13 @@ const httpServer = app.listen(8080, () => {
 // websocket
 
 const socketServer = new Server(httpServer)
-const newProds = []
 
-socketServer.on('connection',(socket)=>{
+export const newProds = []
+
+socketServer.on('connection', (socket) => {
     console.log(`Usuario conectado ${socket.id}`)
 
-    socket.on('disconnect',()=>{
+    socket.on('disconnect', () => {
         console.log('Uusario desconectado');
     })
 
@@ -56,9 +57,11 @@ socketServer.on('connection',(socket)=>{
     //     console.log(mensaje)
     // })
 
-    socket.on('prods',(obj)=>{
+    socket.on('prods', (obj) => {
         newProds.push(obj)
         console.log("newprods", newProds)
+
+        console.log("obj", obj)
         socketServer.emit('prods', newProds)
     })
 

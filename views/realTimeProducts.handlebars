@@ -1,24 +1,26 @@
 <h3>Ingresa los datos del producto que desea agregar:</h3>
 
-<form  id="formulario" action="/productos/newprod" method='post'>
- Title: <input type='text' name='title' id='title' />
- Price: <input type="number" name='price' id='price' />
- Description <input type='text' name='description' id='description' />
- Stock: <input type='text' name='stock' id='stock' />
+<div id="formulario">
 
-  <input type='submit' value='INGRESAR' />
-</form>
+    <form id="formulario" action="/productos/newprod" method='post'>
+        Title: <input type='text' name='title' id='title' />
+        Price: <input type="number" name='price' id='price' />
+        Description <input type='text' name='description' id='description' />
+        Stock: <input type='text' name='stock' id='stock' />
 
+        <input type='submit' value='INGRESAR' />
+    </form>
+
+</div>
 <br>
 
 <form id="showAll" action='/' method='get'>Mostrar todos los productos
-<input type='submit' value='Mostrar todo' />
+    <input type='submit' value='Mostrar todo' />
 </form>
 
-
-
-
 <p id="prodAgregado"></p>
+
+
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>

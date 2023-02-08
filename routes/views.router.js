@@ -4,18 +4,18 @@ const router = Router()
 const path = './ProductManager/Productos.json'
 
 
-router.get('/',async(req,res)=>{
-    let productJSON = await fs.promises.readFile(path,'utf-8')
+router.get('/', async (req, res) => {
 
+    let productJSON = await fs.promises.readFile(path, 'utf-8')
     let products = JSON.parse(productJSON)
-    res.render('index', {products})
+    res.render('index', { products })
 })
 
-router.get('/realtimeproducts', async(req, res)=>{
-    let productJSON = await fs.promises.readFile(path,'utf-8')
+router.get('/realtimeproducts', async (req, res) => {
 
+    let productJSON = await fs.promises.readFile(path, 'utf-8')
     let products = JSON.parse(productJSON)
-    res.render('realTimeProducts', {products})
+    res.render('realTimeProducts', { products })
 
 })
 

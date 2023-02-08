@@ -2,7 +2,6 @@ import { Router } from "express";
 import ProductManager from '../ProductManager/ProductManager.js'
 const productManager = new ProductManager('Productos.json')
 
-
 const router = Router();
 
 // todos los productos
@@ -41,7 +40,7 @@ router.post('/newprod', async (req, res) => {
     // console.log("ADD PROD", addProd)
 
     // res.json({ message: 'Producto creado exitosamente', addProd })
-    res.redirect('../realtimeproducts')
+    res.redirect('back')
 })
 
 

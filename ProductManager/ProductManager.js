@@ -1,11 +1,8 @@
 import fs from 'fs'
-import express from 'express'
-import { get } from 'http'
 const path = './ProductManager/Productos.json'
 
 export default class ProductManager {
-
-
+     
     //  ------------Traer todos los productos ------------
     async getProduct() {
         try {
@@ -20,7 +17,7 @@ export default class ProductManager {
         } catch (error) {
             console.log(error)
         }
-    }
+    };
 
     // ------------ Traer productos por ID   ------------
     async getProductById(idProd) {
@@ -32,7 +29,7 @@ export default class ProductManager {
                 // console.log("ID PROD", idProd)
                 // console.log("prod id", prodId)
                 let prodId = productId.find((prod) => prod.id === idProd)
-
+                
                 return prodId
             } else {
                 throw new Error("No existe producto")
@@ -40,7 +37,7 @@ export default class ProductManager {
         } catch (error) {
             console.log("ERROR no encuentra prod", error)
         }
-    }
+    };
 
     //  ------------ AÑADIR Producto  ------------
     async addProduct(prodNuevo) {
@@ -49,9 +46,9 @@ export default class ProductManager {
 
         console.log("PRODUCT FILE", productFile)
         console.log("prodNuevo ProductManager", prodNuevo)
-
+        
         let { id, title, price, img, producto, code, descr, categoria, stock } = prodNuevo
-
+        
         id = productFile.length === 0 ? 1 : productFile[productFile.length - 1].id + 1
 
 
@@ -60,6 +57,8 @@ export default class ProductManager {
         let prodAdded = productFile.push(newProd)
         await fs.promises.writeFile(path, JSON.stringify(productFile))
         console.log("prod added", prodAdded)
+
+   
         return newProd
 
     };
@@ -103,7 +102,7 @@ export default class ProductManager {
             console.log("empty prods", emptyArray)
             return emptyArray
         }
-    }
+    };
 
     //  ------------ eliminar producto ------------
     async deleteProduct(idProd) {
@@ -113,7 +112,6 @@ export default class ProductManager {
         const deleteID = products.filter(prod => prod.id !== idProd)
         // console.log("ID POR ELIMINAR", deleteID)
         // await fs.promises.writeFile(path, JSON.stringify(deleteID))
-
-    }
+    };
 
 }

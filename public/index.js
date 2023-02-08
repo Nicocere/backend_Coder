@@ -12,13 +12,13 @@ const prodAgregado = document.getElementById('prodAgregado')
 formulario.onsubmit = (e) => {
   e.preventDefault()
  
-  const info = {
+  const obj = {
     titulo: titulo.value,
     precio: precio.value,
     descr: descripcion.value,
     stock: stock.value
   }
-  console.log("INFO", info)
+  console.log("objeto index", obj)
   
   Swal.fire({
     position: 'top-end',
@@ -28,22 +28,19 @@ formulario.onsubmit = (e) => {
     timer: 1100
   })
 
-  socketClient.emit('prods', info)
+  socketClient.emit('prods', obj)
 }
 
 socketClient.on('prods',newProds=>{
 
-  console.log("PRODUCTO QUE ME INGRESO ", newProds.titulo)
+  console.log("PRODUCTO QUE ME INGRESO ", newProds)
 
-    let showProds = ""
-   
+    let showProds = ""   
       newProds.forEach(elem=>{
         showProds += `Titulo:  ${elem.titulo} </br> Precio: ${elem.precio} </br>
         Descripcion:${elem.description} </br> Stock: ${elem.stock} </br> </br>`
         
-      })
-    
-      prodAgregado.innerHTML = showProds
-    
-    
-})
+      })  
+      prodAgregado.innerHTML = showProds        
+});
+
