@@ -1,8 +1,8 @@
 const socketClient = io()
 
 // elementos
-const titulo = document.getElementById('title')
 const formulario = document.getElementById('formulario')
+const titulo = document.getElementById('title')
 const precio = document.getElementById('price')
 const descripcion = document.getElementById('description')
 const prodAgregado = document.getElementById('prodAgregado')
@@ -10,15 +10,16 @@ const prodAgregado = document.getElementById('prodAgregado')
 
 
 formulario.onsubmit = (e) => {
+  
+  console.log("objeto index")
   e.preventDefault()
- 
+
   const obj = {
     titulo: titulo.value,
     precio: precio.value,
     descr: descripcion.value,
     stock: stock.value
   }
-  console.log("objeto index", obj)
   
   Swal.fire({
     position: 'top-end',

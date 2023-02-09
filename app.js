@@ -60,7 +60,7 @@ socketServer.on('connection', (socket) => {
     socket.on('prods', (obj) => {
         newProds.push(obj)
         console.log("newprods", newProds)
-
+        app.use('/productos/newprod', productosRouter)
         console.log("obj", obj)
         socketServer.emit('prods', newProds)
     })
