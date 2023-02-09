@@ -64,36 +64,35 @@ export default class ProductManager {
     };
 
 
-    //  ------------ actualizar producto  ------------
-    async updateProduct(productUpload) {
-        try {
-            const productFile = await this.getProduct()
-                console.log("productUpload PARAMETRO  MANAGER ! :", productUpload)
-                
-                const getProdID = await this.getProductById(productUpload.id)
-                
-                
-
-          
-                if(getProdID.id === productUpload.id){
-                    
-                    getProdID.price = productUpload.price;
-                    getProdID.descr = productUpload.descr;
-                    getProdID.code = productUpload.code;
-                    getProdID.title = productUpload.title;
-                    getProdID.categoria = productUpload.categoria;
-                    getProdID.stock = productUpload.stock
-                    
-                }
-                
-                console.log("GET PRODUCT ID AWAIT MANAGER", getProdID)
-                // await fs.promises.writeFile(path, JSON.stringify(getProdID))
-                return getProdID
-       
-        } catch (error) {
-            console.log("ERROR", error)
+  // Manejador de archivos para actualizar un producto
+  async updateProduct(productUpload) {
+    try {
+      const productFile = await this.getProduct()
+      const getProdID = await this.getProductById(productUpload.id)
+  
+      if (getProdID) {
+        getProdID.price = productUpload.price;
+        getProdID.descr = productUpload.descr;
+        getProdID.code = productUpload.code;
+        getProdID.title = productUpload.title;
+        getProdID.categoria = productUpload.categoria;
+        getProdID.stock = productUpload.stock;
+      }
+  
+      const updatedProductFile = productFile.map(product => {
+        if (product.id === productUpload.id) {
+          return getProdID;
         }
-    };
+        return product;
+      });
+  
+      await fs.promises.writeFile(path, JSON.stringify(updatedProductFile))
+      return getProdID
+    } catch (error) {
+      console.log("ERROR", error)
+    }
+  };
+  
 
     // ------------eliminar todos los productos------------
     async deleteAllProducts() {

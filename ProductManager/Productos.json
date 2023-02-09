@@ -148,31 +148,22 @@
     },
     {
         "id": 10,
-        "title": "Ramo Surtido",
-        "price": 600,
-        "descr": "Ramo Surtido ",
-        "code": "Ramo",
+        "price": 3000,
         "thumbnails": [
             "../assets/imagenes/PRODUCTOS/Ramo_Surtido.jpg"
         ],
+        "status": true
+    },
+    {
+        "id": 11,
+        "price": 5800,
+        "descr": "Ramo de ROSAS EUROPEO",
+        "code": "RAMO",
         "categoria": [
             "Rosas",
             "Ramo",
             "Todos"
         ],
-        "stock": 100,
-        "status": true
-    },
-    {
-        "id": 11,
-        "price": 5000,
-        "descr": "caja de chocolatesca Surtido ",
-        "code": "chocolate",
-        "title": "caja chocolates Surtido",
-        "categoria": [
-            "chocolates",
-            "Todos"
-        ],
-        "stock": 100
+        "stock": 50
     }
 ]

@@ -35,12 +35,12 @@ router.get('/:idProd', async (req, res) => {
 // CREAR producto
 router.post('/newprod', async (req, res) => {
     const prodNuevo = req.body
-    // console.log("prodNuevo SERVER ", prodNuevo)
+    console.log("prodNuevo SERVER ", prodNuevo)
     const addProd = await productManager.addProduct(prodNuevo)
     // console.log("ADD PROD", addProd)
 
     // res.json({ message: 'Producto creado exitosamente', addProd })
-    res.redirect('back')
+    // res.redirect('back')
 })
 
 
@@ -65,27 +65,33 @@ router.post('/newprod', async (req, res) => {
 // })
 
 
+// Ruta para actualizar un producto
 router.put('/upload/:idProd', async (req, res) => {
     try {
-
-        let { idProd } = req.params
-        let id = parseInt(idProd)
-
-        let newProduct = req.body
-        console.log("new prod router", newProduct)
-
-        let productUpload = { id, ...newProduct }
-        // console.log("productUpload router ", productUpload)
-        const uploadProd = await productManager.updateProduct(productUpload)
-
-
-        res.json({ message: 'Producto Actualizado exitosamente', uploadProd })
-        return uploadProd
-
-    } catch (error) {
-        console.log("no se pudo actualizar", error)
+    // Obtener el ID del producto desde la ruta
+    let { idProd } = req.params
+    // Validar que el ID es un número entero
+    let id = parseInt(idProd)
+    if (isNaN(id)) {
+        return res.status(400).json({ message: 'El ID proporcionado no es válido' })
     }
-});
+
+    // Obtener el nuevo producto desde la solicitud
+    let newProduct = req.body
+
+    // Crear un objeto para actualizar con el ID y los datos del nuevo producto
+    let productUpload = { id, ...newProduct }
+
+    // Actualizar el producto a través del manejador de archivos
+    const uploadProd = await productManager.updateProduct(productUpload)
+
+    // Devolver una respuesta de éxito
+    res.json({ message: 'Producto actualizado exitosamente', uploadProd })
+} catch (error) {
+    console.log('No se pudo actualizar el producto', error)
+    res.status(500).json({ message: 'No se pudo actualizar el producto' })
+}
+})
 
 
 // eliminar todos los productos
