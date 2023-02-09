@@ -103,14 +103,19 @@ export default class ProductManager {
         }
     };
 
-    //  ------------ eliminar producto ------------
-    async deleteProduct(idProd) {
+ // Eliminar producto
+ async deleteProduct(idProd) {
+    try {
+        const products = await this.getProduct();
+        const remainingProducts = products.filter(product => product.id !== idProd);
+        if (!fs.existsSync(path)) {
+            fs.writeFileSync(path, '[]');
+        }
+        await fs.promises.writeFile(path, JSON.stringify(remainingProducts));
+    } catch (error) {
+        console.error(error);
+    }
+}
 
-
-        const products = await this.getProduct()
-        const deleteID = products.filter(prod => prod.id !== idProd)
-        // console.log("ID POR ELIMINAR", deleteID)
-        // await fs.promises.writeFile(path, JSON.stringify(deleteID))
-    };
 
 }
