@@ -116,17 +116,5 @@ router.delete('/delete/:idProd', async (req, res) => {
     }
 });
 
-// // eliminar producto por ID
-// router.delete('/delete/:idProd', async (req, res) => {
-//     const { idProd } = req.params
-//     console.log(req.body)
-//     console.log("ID del PROD que se eliminara", idProd)
-//     await productManager.deleteProduct(parseInt(idProd))
-
-
-//     res.json({ message: 'Se ha elimiado correctamente un producto. El producto eliminado es: ' + idProd })
-//     });
-
-
 
 export default router

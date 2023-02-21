@@ -94,7 +94,7 @@ export default class ProductManager {
   };
   
 
-    // ------------eliminar todos los productos------------
+    // ------------Eliminar todos los productos------------
     async deleteAllProducts() {
         if (fs.existsSync(path)) {
             const emptyArray = await fs.promises.unlink(path)
@@ -103,7 +103,7 @@ export default class ProductManager {
         }
     };
 
- // Eliminar producto
+ // ------------- Eliminar producto -------------- 
  async deleteProduct(idProd) {
     try {
         const products = await this.getProduct();
