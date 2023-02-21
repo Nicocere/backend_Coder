@@ -56,7 +56,7 @@ router.get("/:cid", async (req, res) => {
     return res.status(404).json({ message: "El Carrito no existe" });
   }else{
     
-    res.json({ cart: carrito });
+    res.json({ Carrito: carrito });
   }
  
 
