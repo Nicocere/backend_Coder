@@ -4,7 +4,7 @@ const cartPath = './Cart/Carrito.json';
 const productsPath = './ProductManager/Productos.json'
 
 export default class CartManager {
-  
+
   async newCart(cart) {
     try {
       const cartFile = await fs.readFile(cartPath, "utf-8");
@@ -22,11 +22,11 @@ export default class CartManager {
       if (!Array.isArray(cartList)) {
         cartList = [];
       }
-      
+
       cartList.push(newCart);
 
       await fs.writeFile(cartPath, JSON.stringify(cartList));
-      
+
       return newCart;
     } catch (error) {
       console.log(error);
@@ -42,7 +42,7 @@ export default class CartManager {
 
       let cartArray = Object.values(cart);
       console.log("cartARRAY,", cartArray)
-      
+
       const cartId = cartArray.find((c) => c.id === cartArray.id);
       console.log("cart id", cartId);
       return cartId;
@@ -58,7 +58,7 @@ export default class CartManager {
       const cart = JSON.parse(cartFile);
 
       let cartArray = Object.values(cart);
-      
+
       const cartObj = cartArray.find((c) => c.id === id);
       console.log("cart get CART by ID", cartObj);
       return cartObj;
@@ -71,8 +71,6 @@ export default class CartManager {
   async getProductById(id) {
     const productsFile = await fs.readFile(productsPath, "utf-8");
     const products = JSON.parse(productsFile);
-    // console.log("PRODUCTS", products);
-
     const findProd = products.find((p) => p.id.toString() === id.toString());
     console.log("findProd", findProd);
     return findProd
@@ -83,7 +81,7 @@ export default class CartManager {
     try {
       const cartFile = await fs.readFile(cartPath, "utf-8");
       const cartList = JSON.parse(cartFile);
-  
+
       const index = cartList.findIndex((c) => c.id === cart.id);
       if (index >= 0) {
         cartList[index].products = cart.products;
@@ -94,24 +92,5 @@ export default class CartManager {
       console.log(error);
     }
   }
-  
-  
-// async updateCart(cart) {
-//   const carts = await this.getCart();
-//   console.log("CARTS UPDATE CART", carts)
-  
-//   const updatedCarts = carts?.map((c) => {
-//     if (c.id === cart.id) {
-//       const existingProduct = c.products.find((p) => p.id === cart.id);
-//       if (existingProduct) {
-//         existingProduct.quantity += 1;
-//       } else {
-//         c.products.push({ id: pid, quantity: 1 });
-//       }
-//     }
-//     return c;
-//   });
-//   await fs.writeFile(cartPath, JSON.stringify(updatedCarts));
-// }
 
 }
