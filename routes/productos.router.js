@@ -30,7 +30,7 @@ router.get('/prod', async (req, res) => {
 router.get('/:idProd', async (req, res) => {
     const { idProd } = req.params
     console.log("REq.params", idProd)
-    const prodID = await productManager.getProductById(parseInt(idProd))
+    const prodID = await productManager.getProductById(idProd)
     // console.log("PROD ID server", JSON.stringify(prodID))
 
     res.json({ prodID })

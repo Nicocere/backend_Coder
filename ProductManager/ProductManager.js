@@ -27,26 +27,11 @@ export default class ProductManager {
     async getProductById(idProd) {
 
         try {
-            const productId = await productsModel.findById({_id:idProd})
+            const productId = await productsModel.findById(idProd)
             console.log("PROD POR ID", productId)
-
-            if (productId) {
-
-                res.json({ productId })
-
-                return productId
-
-
-                // if (this.getProduct) {
-                //     // console.log("product id", productId)
-                //     // console.log("ID PROD", idProd)
-                //     // console.log("prod id", prodId)
-                //     let prodId = productId.find((prod) => prod.id === idProd)
-
-                //     return prodId
-            } else {
-                throw new Error("No existe producto")
-            }
+            
+            return productId
+            
         } catch (error) {
             console.log("ERROR no encuentra prod", error)
         }
