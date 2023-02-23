@@ -1,14 +1,20 @@
-import { Router } from "express";
+import { json, Router } from "express";
 import ProductManager from '../ProductManager/ProductManager.js'
-const productManager = new ProductManager('Productos.json')
 
+const productManager = new ProductManager()
 const router = Router();
 
 // todos los productos
 router.get('/', async (req, res) => {
-    const prods = await productManager.getProduct(req.query)
+    const prods = await productManager.getProduct()
+    if(prods.length !== 0){
+        res.json({prods})
+    }else{
+        res.send('No hay Productos en la Base de Datos')
+    }
+
     // const {limit, order} = req.query
-    res.json({ prods })
+    // res.json({ prods })
 })
 
 // productos con limites
@@ -23,7 +29,7 @@ router.get('/prod', async (req, res) => {
 // productos por ID
 router.get('/:idProd', async (req, res) => {
     const { idProd } = req.params
-    // console.log("REq.params", idProd)
+    console.log("REq.params", idProd)
     const prodID = await productManager.getProductById(parseInt(idProd))
     // console.log("PROD ID server", JSON.stringify(prodID))
 
@@ -42,28 +48,6 @@ router.post('/newprod', async (req, res) => {
     // res.json({ message: 'Producto creado exitosamente', addProd })
     // res.redirect('back')
 })
-
-
-
-// ACTUALIZAR un producto
-
-// router.put('/upload/:idProd', async (req, res) =>{
-//     try {
-//         let {idProd} = req.params
-//         let uploadProd = req.body
-//         console.log("ID PROD", idProd)
-//         let {title , price , descr, code , stock, status} = uploadProd
-//         console.log("UPLOAD PROD",uploadProd)
-//         await prod.update({uploadProd}, {
-//             where: {
-//                 idProd
-//             },
-//         })
-//     } catch (error) {
-//        console.log("no se pudo actualizar")
-//     }
-// })
-
 
 // Ruta para actualizar un producto
 router.put('/upload/:idProd', async (req, res) => {

@@ -6,7 +6,7 @@ import cartRouter from './routes/carts.router.js'
 import viewsRouter from './routes/views.router.js'
 import { Server } from 'socket.io'
 import { __dirname } from './utils.js'
-
+import './dbConfig.js'
 
 const productManager = new ProductManager('Productos.json')
 const app = express()
