@@ -1,32 +1,35 @@
-import { application, Router } from "express";
+import { Router } from "express";
 import fs from 'fs'
 const router = Router()
-const path = './ProductManager/Productos.json'
+const path = './Products/Productos.json'
+import ProductManager from '../dao/MongoManagers/ProductManager.js'
+const productManager = new ProductManager()
+
 
 
 router.get('/', async (req, res) => {
 
+//con mongo
+    // const prods = await productManager.getProduct()
+
+    
+//con fs 
     let productJSON = await fs.promises.readFile(path, 'utf-8')
-    let products = JSON.parse(productJSON)
-    res.render('index', { products })
+    let prods = JSON.parse(productJSON)
+    res.render('index',  {prods} )
 })
 
 router.get('/realtimeproducts', async (req, res) => {
 
-    let productJSON = await fs.promises.readFile(path, 'utf-8')
-    let products = JSON.parse(productJSON)
+//con mongo
+    const products = await productManager.addProduct()
+
+//con fs
+    // let productJSON = await fs.promises.readFile(path, 'utf-8')
+    // let products = JSON.parse(productJSON)
     res.render('realTimeProducts', { products })
 
 })
-
-// router.get('/addProd', async(req,res)=>{
-//     let productJSON = await fs.promises.readFile(path,'utf-8')
-//     // console.log("PROD", productJSON)
-//     let products = JSON.parse(productJSON)
-//     // res.render({products})
-//     // res.render({path})
-//     res.render('formulario')
-// })
 
 
 export default router

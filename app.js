@@ -1,12 +1,12 @@
 import express from 'express'
-import ProductManager from './ProductManager/ProductManager.js'
+import ProductManager from './dao/MongoManagers/ProductManager.js'
 import handlebars from 'express-handlebars'
 import productosRouter from './routes/productos.router.js'
 import cartRouter from './routes/carts.router.js'
 import viewsRouter from './routes/views.router.js'
 import { Server } from 'socket.io'
 import { __dirname } from './utils.js'
-import './dbConfig.js'
+import './dao/dbConfig.js'
 
 const productManager = new ProductManager('Productos.json')
 const app = express()
