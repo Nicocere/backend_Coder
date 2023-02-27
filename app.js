@@ -44,17 +44,34 @@ const httpServer = app.listen(8080, () => {
     console.log('Escuchando al puerto 8080')
 })
 
+
+
 // WebSocket
 const socketServer = new Server(httpServer)
 
 export const newProds = []
 
-socketServer.on('connection', (socket) => {
-    console.log(`Usuario conectado ${socket.id}`)
+const infoMensajes = []
 
-    socket.on('disconnect', () => {
+socketServer.on('connection',socket=>{
+    console.log(`Usuario conectado: ${socket.id}`)
+
+    socket.on('disconnect',()=>{
         console.log('Usuario desconectado')
     })
+
+// MENSAJES
+    socket.on('nuevoUsuario',usuario=>{
+        socket.broadcast.emit('broadcast',usuario)
+    })
+
+    socket.on('mensaje',info=>{
+        infoMensajes.push(info)
+        console.log("mensajes que entraron", infoMensajes)
+        socketServer.emit('chat',infoMensajes)
+    })
+
+// PRODUCTOS
 
     socket.on('prods', (obj) => {
         newProds.push(obj)

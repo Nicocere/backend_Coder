@@ -4,7 +4,7 @@ const productSchema = new mongoose.Schema({
     title:{
         type: String,
         require: true,
-        unique: false
+        unique: true
     },
     price:{
          type: Number,
@@ -13,7 +13,8 @@ const productSchema = new mongoose.Schema({
     },
     code: {
         type: String,
-        require: true},
+        require: true
+    },
     stock: {
         type: Number,
         require: true

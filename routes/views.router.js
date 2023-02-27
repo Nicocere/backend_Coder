@@ -1,9 +1,12 @@
 import { Router } from "express";
 import fs from 'fs'
+import ProductManager from '../dao/MongoManagers/ProductManager.js'
+// import 
+
 const router = Router()
 const path = './Products/Productos.json'
-import ProductManager from '../dao/MongoManagers/ProductManager.js'
 const productManager = new ProductManager()
+
 
 
 
@@ -30,6 +33,11 @@ router.get('/realtimeproducts', async (req, res) => {
     res.render('realTimeProducts', { products })
 
 })
+
+router.get('/chat', async (req, res)=>{
+    res.render('chat',)
+})
+
 
 
 export default router
