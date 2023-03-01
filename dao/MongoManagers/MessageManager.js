@@ -1,21 +1,19 @@
-import { MessageModel } from "../Models/message.model";
-
+import { MessageModel } from "../Models/message.model.js";
 
 export default class MessageManager {
 
     async newMessage(message) {
       try {
-  
-          const newMensaje = await MessageModel.create(cart);
-  
-          console.log("newMensaje ", newMensaje)
-
-          return newMensaje
-  
+        const newMensaje = new MessageModel({
+          user: message.nombre,
+          message: message.mensaje
+        });
+        await newMensaje.save();
+        console.log('Mensaje guardado en la base de datos');
+        return newMensaje;
       } catch (error) {
         console.log(error);
       }
     }
-
 }
 

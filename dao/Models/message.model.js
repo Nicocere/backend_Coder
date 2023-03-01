@@ -3,13 +3,18 @@ import mongoose from "mongoose";
 const messageSchema = new mongoose.Schema({
     user: {
         type: String,
-        require: true
-    },
-    message: {
+        required: true
+      },
+      message: {
         type: String,
-        require: true
-    }
+        required: true
+      },
+      timestamp: {
+        type: Date,
+        default: Date.now
+      }
+
 
 });
 
-export const MessageModel = mongoose.model('Messages', messageSchema)
+export const MessageModel = mongoose.model('Messages', messageSchema);
