@@ -8,12 +8,20 @@ import { Server } from 'socket.io'
 import { __dirname } from './utils.js'
 import './dao/dbConfig.js'
 import { MessageModel } from './dao/Models/message.model.js'
+import cookieParser from 'cookie-parser'
+
 
 const productManager = new ProductManager('Productos.json')
 const app = express()
 
 // Parsear el cuerpo de la petición a JSON
 app.use(express.json())
+
+// Cookie Parser
+app.use(cookieParser())
+app.get('/createCookie', (req,res)=>{
+    res.cookie("primeraCookie65", 'mi primera cookie').send('cookie guardada con exito')
+})
 
 // Parsear los datos del formulario a objetos
 app.use(express.urlencoded({ extended: true }))
