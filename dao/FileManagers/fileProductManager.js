@@ -9,7 +9,6 @@ export default class ProductManager {
             if (fs.existsSync(path)) {
                 const productFile = await fs.promises.readFile(path, 'utf-8')
                 const productoJS = JSON.parse(productFile)
-                // console.log("PRODUCTOS EN JSON", productoJS)
                 return productoJS
             } else {
                 return []
@@ -25,9 +24,6 @@ export default class ProductManager {
         try {
             if (this.getProduct) {
                 const productId = await this.getProduct()
-                // console.log("product id", productId)
-                // console.log("ID PROD", idProd)
-                // console.log("prod id", prodId)
                 let prodId = productId.find((prod) => prod.id === idProd)
 
                 return prodId

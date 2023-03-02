@@ -1,4 +1,3 @@
-// const productsPath = './ProductManager/Productos.json'
 import { productsModel } from '../Models/product.model.js'
 import { Cart } from '../Models/carts.model.js';
 
@@ -8,11 +7,11 @@ export default class CartManager {
   async newCart(cart) {
     try {
 
-        const newCart = await Cart.create(cart);
+      const newCart = await Cart.create(cart);
 
-        console.log("new ", newCart)
-        console.log("new cart ID", newCart._id)
-        return newCart
+      console.log("new ", newCart)
+      console.log("new cart ID", newCart._id)
+      return newCart
 
     } catch (error) {
       console.log(error);
@@ -21,9 +20,9 @@ export default class CartManager {
 
   async getCart() {
     try {
-        const getCart = await Cart.find();
+      const getCart = await Cart.find();
 
-        return getCart
+      return getCart
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +41,7 @@ export default class CartManager {
     }
   }
 
-  
+
   async getProductById(cartId, productId) {
     try {
       const cart = await Cart.findById(cartId);
@@ -61,13 +60,10 @@ export default class CartManager {
       if (!cart) {
         throw new Error("El Carrito no existe.");
       }
-  
       // Agregar el producto al carrito
       cart.products.push(product);
-  
       // Guardar los cambios en la base de datos
       const updatedCart = await cart.save();
-  
       // Devolver el carrito actualizado
       return updatedCart;
     } catch (error) {
@@ -78,9 +74,9 @@ export default class CartManager {
 
   async updateCart(cart) {
     try {
-        const updatedCart = await Cart.findByIdAndUpdate(cart._id, cart, { new: true });
-        console.log("updated cart", updatedCart);
-        return updatedCart;
+      const updatedCart = await Cart.findByIdAndUpdate(cart._id, cart, { new: true });
+      console.log("updated cart", updatedCart);
+      return updatedCart;
     } catch (error) {
       console.log(error);
     }

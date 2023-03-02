@@ -49,41 +49,52 @@ router.post('/newprod', async (req, res) => {
     // res.redirect('back')
 })
 
-// Ruta para actualizar un producto
+// Actualizar un producto
+
 router.put('/upload/:idProd', async (req, res) => {
     try {
-    // Obtener el ID del producto desde la ruta
-    let { idProd } = req.params
-    // Validar que el ID es un número entero
-    let id = parseInt(idProd)
-    if (isNaN(id)) {
-        return res.status(400).json({ message: 'El ID proporcionado no es válido' })
+        // Obtener el ID del producto desde la ruta
+        const { idProd } = req.params;
+        // Validar que el ID es un número entero
+        const id = parseInt(idProd);
+        if (isNaN(id)) {
+            return res.status(400).json({ message: 'El ID proporcionado no es válido' });
+        }
+
+        // Obtener el nuevo producto desde la solicitud
+        const newProduct = req.body;
+
+        // Buscar el producto por su ID y actualizarlo
+        const productUpload = await Product.findByIdAndUpdate(id, newProduct, { new: true });
+
+        if (!productUpload) {
+            return res.status(404).json({ message: 'No se encontró el producto con el ID proporcionado' });
+        }
+
+        // Devolver una respuesta de éxito con el producto actualizado
+        res.json({ message: 'Producto actualizado exitosamente', product: productUpload });
+    } catch (error) {
+        console.error('No se pudo actualizar el producto', error);
+        res.status(500).json({ message: 'No se pudo actualizar el producto' });
     }
-
-    // Obtener el nuevo producto desde la solicitud
-    let newProduct = req.body
-
-    // Crear un objeto para actualizar con el ID y los datos del nuevo producto
-    let productUpload = { id, ...newProduct }
-
-    // Actualizar el producto a través del manejador de archivos
-    const uploadProd = await productManager.updateProduct(productUpload)
-
-    // Devolver una respuesta de éxito
-    res.json({ message: 'Producto actualizado exitosamente', uploadProd })
-} catch (error) {
-    console.log('No se pudo actualizar el producto', error)
-    res.status(500).json({ message: 'No se pudo actualizar el producto' })
-}
-})
+});
 
 
 // eliminar todos los productos
-router.delete('/delete/all', async (req, res) => {
-    await productManager.deleteAllProducts()
-    res.send('Todos los productos fueron eliminados eliminados')
-});
 
+router.delete('/delete/all', async (req, res) => {
+    try {
+        // Eliminar todos los productos
+        const result = await productManager.deleteMany({});
+        const count = result.deletedCount;
+
+        // Devolver una respuesta de éxito con la cantidad de productos eliminados
+        res.json({ message: `${count} productos eliminados exitosamente` });
+    } catch (error) {
+        console.error('No se pudieron eliminar los productos', error);
+        res.status(500).json({ message: 'No se pudieron eliminar los productos' });
+    }
+});
 
 // Eliminar producto por ID
 router.delete('/delete/:idProd', async (req, res) => {
