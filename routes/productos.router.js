@@ -1,5 +1,6 @@
 import { json, Router } from "express";
 import ProductManager from '../dao/MongoManagers/ProductManager.js'
+import { productsModel } from "../dao/Models/product.model.js";
 
 const productManager = new ProductManager()
 const router = Router();
@@ -7,15 +8,26 @@ const router = Router();
 // todos los productos
 router.get('/', async (req, res) => {
     const prods = await productManager.getProduct()
-    if(prods.length !== 0){
-        res.json({prods})
-    }else{
+    if (prods.length !== 0) {
+        res.json({ prods })
+    } else {
         res.send('No hay Productos en la Base de Datos')
     }
-
-    // const {limit, order} = req.query
-    // res.json({ prods })
 })
+
+//PAGINACION MONGOOSE 
+router.get('/pagination', async (req, res) => {
+
+
+    //Limite de productos por pagina.
+    const { page = 1, limit = 4, code } = req.query
+
+    const products = await productsModel.paginate({}, { code: code }, { limit, page })
+    const next = products.hasNextPage ? `http://localhost:8080/productos/pagination?page=${products.nextPage}` : null
+    const prev = products.hasPrevPage ? `http://localhost:8080/productos/pagination?page=${products.prevPage}` : null
+    res.json({info: { count: products.totalDocs, pages: products.totalPages, next, prev }, results: products.docs  })
+})
+
 
 // productos con limites
 router.get('/prod', async (req, res) => {
@@ -36,6 +48,13 @@ router.get('/:idProd', async (req, res) => {
     res.json({ prodID })
 })
 
+
+// Agreggation 
+router.get('/aggregation', async (req, res) => {
+    const prod = await productsModel.aggregationFun()
+
+    res.json({ prod })
+})
 
 
 // CREAR producto

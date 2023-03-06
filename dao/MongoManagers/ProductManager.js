@@ -16,12 +16,36 @@ export default class ProductManager {
     async getProductById(idProd) {
 
         try {
-            const productId = await productsModel.findById(idProd)
+            const productId = await productsModel.findById({_id:idProd})
+            console.log("PRODUCT ID", productId)
                 return productId    
         } catch (error) {
             console.log("ERROR no encuentra prod", error)
         }
     };
+
+
+    async aggregationFun() {
+        try {
+          const prod = await productsModel.aggregate([
+            { $match: { title: { $gt: String } } },
+            // {
+            //   $group: {
+            //     _id: '$genero',
+            //     promedio: { $avg: '$calificacion' },
+            //     sumCal: { $sum: '$calificacion' },
+            //   },
+            // },
+            // {
+            //   $sort: { promedio: -1 },
+            // },
+          ])
+          console.log("prod", prod)
+          return prod
+        } catch (error) {
+          console.log(error)
+        }
+      }
 
     //     //  ------------ AÑADIR Producto  ------------
         async addProduct(prodNuevo) {
