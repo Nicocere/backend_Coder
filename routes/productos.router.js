@@ -1,4 +1,4 @@
-import { json, Router } from "express";
+import { Router } from "express";
 import ProductManager from '../dao/MongoManagers/ProductManager.js'
 import { productsModel } from "../dao/Models/product.model.js";
 
@@ -20,12 +20,25 @@ router.get('/pagination', async (req, res) => {
 
 
     //Limite de productos por pagina.
-    const { page = 1, limit = 4, code } = req.query
+    const { code , page} = req.query
 
-    const products = await productsModel.paginate({}, { code: code }, { limit, page })
+    const options = {
+        page: page,
+        limit: 3,
+        select: code
+      };
+
+    const products = await productsModel.paginate({}, options)
+    //     , (err, result) => {
+    //     if (err) {
+    //       res.status(500).json({ error: err });
+    //     } else {
+    //       res.status(200).json(result);
+    //     }
+    //   });
     const next = products.hasNextPage ? `http://localhost:8080/productos/pagination?page=${products.nextPage}` : null
     const prev = products.hasPrevPage ? `http://localhost:8080/productos/pagination?page=${products.prevPage}` : null
-    res.json({info: { count: products.totalDocs, pages: products.totalPages, next, prev }, results: products.docs  })
+    res.json({info: { count: products.totalDocs,limite: products.limit , pages: products.totalPages, next, prev }, results: products.docs  })
 })
 
 
