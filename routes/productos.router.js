@@ -28,13 +28,8 @@ router.get('/pagination', async (req, res) => {
         sort: {},
     };
 
-    const { status, title, descr } = req.query;
-
-    // // Construir el objeto de búsqueda.
-    // const query = {};
-
-
     // Parámetros de búsqueda por codigo y query.
+    const { status, title, descr } = req.query;
     const query = {};
     if (req.query.code) {
         query.code = { $regex: req.query.code, $options: 'i' };
@@ -56,8 +51,18 @@ router.get('/pagination', async (req, res) => {
     const next = products.hasNextPage ? `http://localhost:8080/productos/pagination?page=${products.nextPage}` : null;
     const prev = products.hasPrevPage ? `http://localhost:8080/productos/pagination?page=${products.prevPage}` : null;
 
-
-    res.json({ info: { count: products.totalDocs, limite: products.limit, pages: products.totalPages, next, prev }, results: products.docs })
+    res.status(200).json({
+        info:
+        {
+            Curret_Page: products.page,
+            Total_Pages: products.totalDocs,
+            Limite: products.limit,
+            Paginas: products.totalPages,
+            Next: next,
+            Prev: prev
+        },
+        results: products.docs
+    })
 })
 
 
