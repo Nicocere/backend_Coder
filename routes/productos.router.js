@@ -18,27 +18,37 @@ router.get('/', async (req, res) => {
 //PAGINACION MONGOOSE 
 router.get('/pagination', async (req, res) => {
 
+    // Limite de productos por página.
+    const limit = req.query.limit || 3;
 
-    //Limite de productos por pagina.
-    const { code , page} = req.query
-
+    // Opciones de paginación y búsqueda.
     const options = {
-        page: page,
-        limit: 3,
-        select: code
-      };
+        page: req.query.page || 1,
+        limit: limit,
+        sort: {},
+    };
 
-    const products = await productsModel.paginate({}, options)
-    //     , (err, result) => {
-    //     if (err) {
-    //       res.status(500).json({ error: err });
-    //     } else {
-    //       res.status(200).json(result);
-    //     }
-    //   });
-    const next = products.hasNextPage ? `http://localhost:8080/productos/pagination?page=${products.nextPage}` : null
-    const prev = products.hasPrevPage ? `http://localhost:8080/productos/pagination?page=${products.prevPage}` : null
-    res.json({info: { count: products.totalDocs,limite: products.limit , pages: products.totalPages, next, prev }, results: products.docs  })
+    // Parámetros de búsqueda por codigo y query.
+    const query = {};
+    if (req.query.code) {
+        query.code = { $regex: req.query.code, $options: 'i' };
+    }
+
+    // Ordenamiento asc / desc
+    if (req.query.sort) {
+        const sortOrder = req.query.sort === 'asc' ? 1 : -1;
+        options.sort.price = sortOrder;
+    }
+
+    // Consulta y paginación de productos.
+    const products = await productsModel.paginate(query, options);
+
+    // Enlaces de página siguiente y anterior.
+    const next = products.hasNextPage ? `http://localhost:8080/productos/pagination?page=${products.nextPage}` : null;
+    const prev = products.hasPrevPage ? `http://localhost:8080/productos/pagination?page=${products.prevPage}` : null;
+
+
+    res.json({ info: { count: products.totalDocs, limite: products.limit, pages: products.totalPages, next, prev }, results: products.docs })
 })
 
 
