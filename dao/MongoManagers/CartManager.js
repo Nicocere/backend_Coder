@@ -1,4 +1,3 @@
-import { productsModel } from '../Models/product.model.js'
 import { Cart } from '../Models/carts.model.js';
 
 
@@ -53,6 +52,7 @@ export default class CartManager {
     }
   }
 
+
   async addProduct(cartId, product) {
     try {
       // Buscar el carrito por su id
@@ -72,6 +72,24 @@ export default class CartManager {
     }
   }
 
+  async updateProductQuantity(cartId, productId, quantity) {
+    try {
+      const cart = await Cart.findById(cartId);
+      if (!cart) {
+        return null;
+      }
+      const product = cart.products.find((p) => p._id.equals(productId));
+      if (!product) {
+        return null;
+      }
+      product.quantity = quantity;
+      await cart.save();
+      return product;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async updateCart(cart) {
     try {
       const updatedCart = await Cart.findByIdAndUpdate(cart._id, cart, { new: true });
@@ -79,6 +97,20 @@ export default class CartManager {
       return updatedCart;
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  async updateCartProducts(cartId, products) {
+    try {
+      const cart = await Cart.findById(cartId);
+      if (!cart) {
+        return null;
+      }
+      cart.products = products;
+      await cart.save();
+      return cart;
+    } catch (error) {
+      throw error;
     }
   }
 

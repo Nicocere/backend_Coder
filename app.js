@@ -10,7 +10,6 @@ import './dao/dbConfig.js'
 import { MessageModel } from './dao/Models/message.model.js'
 import cookieParser from 'cookie-parser'
 
-
 const productManager = new ProductManager('Productos.json')
 const app = express()
 
@@ -30,14 +29,19 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 
 // Configurar handlebars
-app.engine('handlebars', handlebars.engine())
+app.engine('handlebars', handlebars.engine({
+    allowProtoMethodsByDefault: true
+}))
+// app.engine('handlebars', handlebars());
 app.set('views', `${__dirname}/views`)
 app.set('view engine', 'handlebars')
+
+
 
 // Rutas
 app.use('/productos', productosRouter)
 app.use('/cart', cartRouter)
-app.use('/', viewsRouter)
+app.use('/views', viewsRouter)
 
 app.get('/', (req, res) => {
     res.render('index')
