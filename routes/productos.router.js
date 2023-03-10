@@ -28,11 +28,20 @@ router.get('/pagination', async (req, res) => {
         sort: {},
     };
 
+    const { status, title, descr } = req.query;
+
+    // // Construir el objeto de búsqueda.
+    // const query = {};
+
+
     // Parámetros de búsqueda por codigo y query.
     const query = {};
     if (req.query.code) {
         query.code = { $regex: req.query.code, $options: 'i' };
     }
+    if (status) query.status = status;
+    if (title) query.title = { $regex: title, $options: 'i' };
+    if (descr) query.descr = { $regex: descr, $options: 'i' };
 
     // Ordenamiento asc / desc
     if (req.query.sort) {
