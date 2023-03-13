@@ -18,6 +18,13 @@ router.get('/', async (req, res) => {
     res.render('index',  {prods} )
 })
 
+router.get('/login', async (req, res)=>{
+    res.render('login')
+})
+
+router.get('/session', async (req, res)=>{
+    res.render('session')
+})
 
 router.get('/products', async (req, res) =>{
     
